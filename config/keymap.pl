@@ -22,9 +22,9 @@ my $caps=layer{
 
 my $func=layer{
 	ESC=>'&bt BT_CLR',
-	TAB=>'&bt BT_NXT', Q=>'&kp C_QUIT', G=>'&kp G_BRI_DN', H=>'&kp C_BRI_UP', P=>'&kp PSCRN',
+	TAB=>'&bt BT_NXT', Q=>'&kp C_QUIT', P=>'&kp PSCRN',
 	A=>'&kp C_VOL_DN', S=>'&kp C_MUTE', D=>'&kp C_VOL_UP', RET=>'&bootloader',
-	N=>'&kp C_AC_NEW',
+	V=>'&kp C_BRI_DN', B=>'&kp C_BRI_UP',
 	SPACE=>'&kp C_PP'};
 
 print <<__;
