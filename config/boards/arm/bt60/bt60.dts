@@ -6,11 +6,7 @@
 
 /dts-v1/;
 #include <nordic/nrf52840_qiaa.dtsi>
-
-#include <dt-bindings/led/led.h>
 #include <dt-bindings/zmk/matrix_transform.h>
-
-#include "pinctrl.dtsi"
 
 / {
 	model = "BT60";
@@ -21,15 +17,8 @@
 		zephyr,sram = &sram0;
 		zephyr,flash = &flash0;
 		zmk,kscan = &kscan0;
-		zmk,underglow = &led_strip;
-		zmk,backlight = &backlight;
 		zmk,matrix_transform = &default_transform;
-		zmk,battery = &vbatt;
-	};
-
-	sensors {
-		compatible = "zmk,keymap-sensors";
-		sensors = <&encoder_1>;
+		zmk,battery = &vbatt;	
 	};
 
 	default_transform: keymap_transform_0 {
@@ -44,7 +33,6 @@
 			RC(5,0)   RC(5,1)   RC(5,2)                      RC(5,6)                     RC(5,10)   RC(5,11)    RC(5,12)     RC(5,13)
 		>;
 	};
-
 
 	kscan0: kscan_0 {
 		compatible = "zmk,kscan-gpio-matrix";
@@ -77,50 +65,6 @@
 			, <&gpio1 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
 			;
 	};
-	ext-power {
-		compatible = "zmk,ext-power-generic";
-		label = "EXT_POWER";
-		control-gpios = <&gpio0 13 GPIO_ACTIVE_HIGH>;
-	};
-	encoder_1: encoder_1 {
-		compatible = "alps,ec11";
-		label = "ENCODER_ONE";
-		a-gpios = <&gpio0 21 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-		b-gpios = <&gpio0 19 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-		resolution = <4>;
-		status = "okay";
-	};
-	encoder_2: encoder_2 {
-		compatible = "alps,ec11";
-		label = "ENCODER_TWO";
-		a-gpios = <&gpio0 26 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-		b-gpios = <&gpio0 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-		resolution = <4>;
-		status = "okay";
-	};
-	encoder_3: encoder_3 {
-		compatible = "alps,ec11";
-		label = "encoder_3";
-		a-gpios = <&gpio0 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-		b-gpios = <&gpio0 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-		resolution = <4>;
-		status = "okay";
-	};
-	backlight: pwmleds {
-		compatible = "pwm-leds";
-		label = "Backlight LEDs";
-		pwm_led_0 {
-			pwms = <&pwm0 0 10000 PWM_POLARITY_NORMAL>;
-		};
-	};
-
-	leds {
-		compatible = "gpio-leds";
-		blue_led: led_0 {
-			gpios = <&gpio0 15 GPIO_ACTIVE_HIGH>;
-			label = "Blue LED";
-		};
-	};
 
 	vbatt: vbatt {
 		compatible = "zmk,battery-voltage-divider";
@@ -133,13 +77,6 @@
 
 &adc {
 	status = "okay";
-};
-
-&pwm0 {
-	status = "okay";
-	pinctrl-0 = <&pwm0_default>;
-	pinctrl-1 = <&pwm0_sleep>;
-	pinctrl-names = "default", "sleep";
 };
 
 &gpiote {
@@ -157,7 +94,6 @@
 &usbd {
 	status = "okay";
 };
-
 
 &flash0 {
 	/*
@@ -196,30 +132,5 @@
 			label = "adafruit_boot";
 			reg = <0x000f4000 0x0000c000>;
 		};
-	};
-};
-
-&spi3 {
-	compatible = "nordic,nrf-spim";
-	pinctrl-0 = <&spi3_default>;
-	pinctrl-1 = <&spi3_sleep>;
-	pinctrl-names = "default", "sleep";
-	status = "okay";
-	rx-delay-supported;
-	rx-delay = < 0x2 >;
-
-	led_strip: ws2812@0 {
-		compatible = "worldsemi,ws2812-spi";
-		label = "WS2812";
-
-		/* SPI */
-		reg = <0>; /* ignored, but necessary for SPI bindings */
-		spi-max-frequency = <4000000>;
-
-		/* WS2812 */
-		chain-length = <12>; /* LED strip length */
-		spi-one-frame = <0x70>;
-		spi-zero-frame = <0x40>;
-		color-mapping = <LED_COLOR_ID_GREEN LED_COLOR_ID_RED LED_COLOR_ID_BLUE>;
 	};
 };
