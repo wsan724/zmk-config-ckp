@@ -22,7 +22,7 @@ my $caps=layer{
 	N=>'&kp HOME', M=>'&kp END', RSHFT=>'&caps_word'};
 
 my $func=layer{
-	ESC=>'&bt BT_CLR', N1=>'&bt SEL 0', N2=>'&bt SEL 1', N3=>'&bt SEL 2',
+	ESC=>'&bt BT_CLR', N1=>'&bt BT_SEL 0', N2=>'&bt BT_SEL 1', N3=>'&bt BT_SEL 2',
 	TAB=>'&bt BT_NXT', Q=>'&kp C_QUIT', R=>'&kp C_RESET', P=>'&kp PSCRN',
 	A=>'&kp C_VOL_DN', S=>'&kp C_MUTE', D=>'&kp C_VOL_UP', RET=>'&bootloader',
 	SPACE=>'&kp C_PP'};
