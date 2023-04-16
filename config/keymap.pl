@@ -5,7 +5,7 @@ my @layout=qw(
 	TAB Q W E R T Y U I O P LBKT RBKT BSLH
 	CAPS A S D F G H J K L SEMI SQT RET
 	LSHFT Z X C V B N M COMMA DOT FSLH RSHFT
-	LCTRL LCMD LALT SPACE RALT FUNC RCMD RCTRL);
+	LCTRL LCMD LALT SPACE RALT FUNC LEFT RIGHT);
 
 sub layer($h){
 	"bindings=<@{[map $h->{$_}//'&trans', @layout]}>;"}
@@ -13,18 +13,18 @@ sub layer($h){
 my $base=layer{
 	map({;$_,"&kp $_"}@layout),
 	CAPS=>'&mo 1',
-	FUNC=>'&mo 2', RALT=>'&kp LEFT', RGUI=>'&kp C_MENU', RCTRL=>'&kp RIGHT'};
+	FUNC=>'&mo 2', LEFT=>'&kp LEFT', RIGHT=>'&kp RIGHT'};
 
 my $caps=layer{
 	map({;"N$_","&kp F$_"}1..9), N0=>'&kp F10', MINUS=>'&kp F11', EQUAL=>'&kp F12', BSPC=>'&kp DEL',
-	H=>'&kp LEFT', J=>'&kp DOWN', K=>'&kp UP', L=>'&kp RIGHT', SQT=>'&kp GRAVE', RET=>'&kp INS',
+	U=>'&kp C_AC_UNDO', 
+	H=>'&kp LEFT', J=>'&kp DOWN', K=>'&kp UP', L=>'&kp RIGHT', SQT=>'&kp GRAVE', RET=>'&kp CAPS',
 	N=>'&kp HOME', M=>'&kp END', RSHFT=>'&caps_word'};
 
 my $func=layer{
-	ESC=>'&bt BT_CLR',
-	TAB=>'&bt BT_NXT', Q=>'&kp C_QUIT', P=>'&kp PSCRN',
+	ESC=>'&bt BT_CLR', N1=>'&bt SEL 0', N2=>'&bt SEL 1', N3=>'&bt SEL 2',
+	TAB=>'&bt BT_NXT', Q=>'&kp C_QUIT', R=>'&kp C_RESET', P=>'&kp PSCRN',
 	A=>'&kp C_VOL_DN', S=>'&kp C_MUTE', D=>'&kp C_VOL_UP', RET=>'&bootloader',
-	V=>'&kp C_BRI_DN', B=>'&kp C_BRI_UP',
 	SPACE=>'&kp C_PP'};
 
 print <<__;
