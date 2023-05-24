@@ -17,14 +17,14 @@ my $base=layer{
 
 my $caps=layer{
 	map({;"N$_","&kp F$_"}1..9), N0=>'&kp F10', MINUS=>'&kp F11', EQUAL=>'&kp F12', BSPC=>'&kp DEL',
-	U=>'&kp C_AC_UNDO', 
+	U=>'&kp C_AC_UNDO', I=>'&kp ESC',
 	H=>'&kp LEFT', J=>'&kp DOWN', K=>'&kp UP', L=>'&kp RIGHT', SQT=>'&kp GRAVE', RET=>'&kp CAPS',
 	N=>'&kp HOME', M=>'&kp END', RSHFT=>'&caps_word'};
 
 my $func=layer{
-	ESC=>'&bt BT_CLR', N1=>'&bt BT_SEL 0', N2=>'&bt BT_SEL 1', N3=>'&bt BT_SEL 2',
+	ESC=>'&trans', N1=>'&bt BT_SEL 0', N2=>'&bt BT_SEL 1', BSPC=>'&bt BT_CLR',
 	TAB=>'&bt BT_NXT', Q=>'&kp C_QUIT', R=>'&kp C_RESET', P=>'&kp PSCRN',
-	A=>'&kp C_VOL_DN', S=>'&kp C_MUTE', D=>'&kp C_VOL_UP', RET=>'&bootloader',
+	J=>'&kp C_VOL_DN', K=>'&kp C_MUTE', L=>'&kp C_VOL_UP', RET=>'&bootloader',
 	SPACE=>'&kp C_PP'};
 
 print <<__;
